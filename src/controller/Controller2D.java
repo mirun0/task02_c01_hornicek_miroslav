@@ -3,10 +3,12 @@ package controller;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import fill.ScanlineFiller;
 import fill.SeedFiller;
 import model.Line;
 import model.Point;
 import model.Polygon;
+import model.Seed;
 import rasterize.LineRasterizerGradient;
 import rasterize.LineRasterizerTrivial;
 import utils.MathUtils;
@@ -31,6 +33,7 @@ public class Controller2D {
     boolean newPointCreation = false;
     boolean pointDeletion = false;
     boolean pointMoving = false;
+    boolean filling = false;
     
     Polygon deletingPointFrom;
 
@@ -53,6 +56,7 @@ public class Controller2D {
 
     ArrayList<Polygon> polygons;
     ArrayList<Line> lines;
+    ArrayList<Seed> seeds;
 
     Polygon activePolygon;
     Line activeLine;
@@ -68,6 +72,7 @@ public class Controller2D {
 
     Renderer2D renderer2d;
     SeedFiller seedFiller;
+    ScanlineFiller scanlineFiller;
 
     int seedFillX, seedFillY = -1;
 
@@ -79,12 +84,14 @@ public class Controller2D {
 
         this.polygons = new ArrayList<Polygon>();
         this.lines = new ArrayList<Line>();
+        this.seeds = new ArrayList<Seed>();
 
         this.lineRasterizerTrivial = new LineRasterizerTrivial(panel.getRaster());
         this.lineRasterizerGradient = new LineRasterizerGradient(panel.getRaster());
 
         this.seedFiller = new SeedFiller(panel.getRaster(), color);
-        this.renderer2d = new Renderer2D(this, seedFiller);
+        this.scanlineFiller = new ScanlineFiller(panel.getRaster(), color);
+        this.renderer2d = new Renderer2D(this, seedFiller, scanlineFiller);
         this.mouseHandler = new MouseHandler(this);
         this.keyHandler = new KeyHandler(this);
         this.mouseMotionHandler = new MouseMotionHandler(this);

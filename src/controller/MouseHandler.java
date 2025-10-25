@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import model.Line;
 import model.Point;
 import model.Polygon;
+import model.Seed;
 import utils.RandomColor;
 
 public class MouseHandler extends MouseAdapter {
@@ -32,13 +33,15 @@ public class MouseHandler extends MouseAdapter {
             } else if(c.pointMoving) {
                 Point find = c.findPoint(e.getX(), e.getY());
                 c.movingPoint = find;
+            } else if(c.filling) {
+                c.seeds.add(new Seed(e.getX(), e.getY(), 0x00ff00, 0));
+                c.seedFillX = e.getX();
+                c.seedFillY = e.getY();
             }
         }
 
         if (e.getButton() == MouseEvent.BUTTON3) {
-            //handleRightClick();
-            c.seedFillX = e.getX();
-            c.seedFillY = e.getY();
+            handleRightClick();
         }
         
         c.render();

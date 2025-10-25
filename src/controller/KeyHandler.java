@@ -16,7 +16,8 @@ public class KeyHandler extends KeyAdapter {
         this.validModeKeys = new ArrayList<>();
         this.validNormalKeys = new ArrayList<>();
 
-        validModeKeys.addAll(Arrays.asList(KeyEvent.VK_B, KeyEvent.VK_ESCAPE, KeyEvent.VK_V, KeyEvent.VK_N, KeyEvent.VK_D));
+        validModeKeys.addAll(Arrays.asList(KeyEvent.VK_B, KeyEvent.VK_ESCAPE, KeyEvent.VK_V, KeyEvent.VK_N, KeyEvent.VK_D, 
+        KeyEvent.VK_F));
         validNormalKeys.addAll(Arrays.asList(KeyEvent.VK_SHIFT, KeyEvent.VK_C, KeyEvent.VK_G));
     }
 
@@ -52,6 +53,7 @@ public class KeyHandler extends KeyAdapter {
             c.pointMoving = false;
             c.newPointCreation = false;
             c.pointDeletion = false;
+            c.filling = false;
 
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_V: {
@@ -72,6 +74,10 @@ public class KeyHandler extends KeyAdapter {
                 }
                 case KeyEvent.VK_D: {
                     c.pointDeletion = true;
+                    break;
+                }
+                case KeyEvent.VK_F: {
+                    c.filling = true;
                     break;
                 }
                 

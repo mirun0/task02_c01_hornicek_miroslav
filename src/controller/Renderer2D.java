@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import fill.ScanlineFiller;
 import fill.SeedFiller;
 import model.Line;
 import model.Point;
 import model.Polygon;
+import model.Seed;
 
 public class Renderer2D {
 
@@ -15,17 +17,21 @@ public class Renderer2D {
     private Graphics g;
 
     private SeedFiller seedFiller;
+    private ScanlineFiller scanlineFiller;
 
-    public Renderer2D(Controller2D panel, SeedFiller seedFiller) {
+    public Renderer2D(Controller2D panel, SeedFiller seedFiller, ScanlineFiller scanlineFiller) {
         this.c = panel;
         this.g = c.panel.getRaster().getGraphics();
         this.seedFiller = seedFiller;
+        this.scanlineFiller = scanlineFiller;
     }
 
     void renderFill() {
-        seedFiller.setStart(c.seedFillX, c.seedFillY);
-        seedFiller.setColor(0x00ff00);
-        seedFiller.fill();
+        for (Seed seed : c.seeds) {
+            seedFiller.setStart(seed.getX(), seed.getY());
+            seedFiller.setColor(seed.getColor());
+            seedFiller.fill();   
+        }
     }
     
     void render() {
@@ -80,11 +86,17 @@ public class Renderer2D {
 
         // render all other polygons
         for (Polygon polygon : c.polygons) {
+            scanlineFiller.setPolygon(polygon);
+            scanlineFiller.fill();
+
             renderPolygon(polygon);
         }
 
-        if(c.seedFillX != -1 && c.seedFillY != -1)
-            renderFill();
+        //if(c.filling) {
+        //    c.seedFillX = c.snappedX;
+        //    c.seedFillY = c.snappedY;
+        renderFill();
+        //}
         // render all points
         renderPoints();
 

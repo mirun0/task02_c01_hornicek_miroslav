@@ -4,7 +4,7 @@ import utils.MathUtils;
 
 public class LineRasterizerTrivial extends LineRasterizer {
 
-    public LineRasterizerTrivial(RasterBufferedImage raster) {
+    public LineRasterizerTrivial(Raster raster) {
         super(raster);
     }
 

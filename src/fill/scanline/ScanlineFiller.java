@@ -1,59 +1,27 @@
-package fill;
+package fill.scanline;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import fill.Filler;
 import model.Polygon;
 import model.Point;
-import rasterize.RasterBufferedImage;
+import rasterize.Raster;
 
 public class ScanlineFiller implements Filler {
 
-    private class EdgeTableEntry {
-        final float yMin;
-        final float yMax;
-        float currentX;
-        final float inverseSlope;
-
-        public EdgeTableEntry(Point a, Point b) {
-            Point pMin = a.getY() <= b.getY() ? a : b;
-            Point pMax = a.getY() <= b.getY() ? b : a;
-
-            float dy = b.getY() - a.getY();
-            float dx = b.getX() - a.getX();
-
-            if(dy == 0) {
-                this.yMin = this.yMax = this.currentX = this.inverseSlope = 0;
-                return;
-            }
-
-            this.yMin = pMin.getY();
-            this.yMax = pMax.getY();
-            this.currentX = pMin.getX();
-            this.inverseSlope = dx / dy;
-        }
-
-        boolean isValid() { 
-            return yMin != yMax; 
-        }
-
-        @Override
-        public String toString() {
-            return "yMin=" + yMin + " yMax=" + yMax + " currentX=" + currentX + " inverseSlope=" + inverseSlope;
-
-        }
-
-    }
-
-    private RasterBufferedImage raster;
+    private Raster raster;
     private int color;
     private Polygon polygon;
 
-    public ScanlineFiller(RasterBufferedImage raster, int color) {
+    public ScanlineFiller(Raster raster, int color) {
         this.raster = raster;
         this.color = color;
     }
 
+    /*
+     * https://how.dev/answers/what-is-scanline-fill-algorithm
+     */
     @Override
     public void fill() {
         ArrayList<EdgeTableEntry> et = new ArrayList<>();
@@ -65,14 +33,10 @@ public class ScanlineFiller implements Filler {
         }
 
         et.sort(Comparator.comparingDouble(e -> e.yMin));
-        
-        /*
-        System.out.println("---------- START ----------");
-        System.out.println("Initial Edge Table: ");
-        for (EdgeTableEntry edgeTableEntry : et) {
-            System.out.println(edgeTableEntry.toString());
+
+        if(et.isEmpty()) {
+            return;
         }
-        */
 
         ArrayList<EdgeTableEntry> aet = new ArrayList<>();
         float yPointer = et.get(0).yMin;
@@ -97,7 +61,9 @@ public class ScanlineFiller implements Filler {
                 }
             }
 
-            if (aet.isEmpty() && et.isEmpty()) break;
+            if (aet.isEmpty() && et.isEmpty()) {
+                break;
+            }
 
             aet.sort(Comparator.comparingDouble(e -> e.currentX));
 
@@ -111,8 +77,8 @@ public class ScanlineFiller implements Filler {
                     xEnd = t;
                 }
 
-                for (int x = xStart; x <= xEnd; x++) {
-                    raster.setPixel(x, (int) yPointer, 0x00ff00);
+                for (int x = xStart + 1; x < xEnd; x++) {
+                    raster.setPixel(x, (int) yPointer, color);
                 }
             }
 
@@ -123,8 +89,6 @@ public class ScanlineFiller implements Filler {
             }
 
         }
-
-        //System.exit(0);
     }
 
     public void setPolygon(Polygon polygon) {
@@ -134,4 +98,5 @@ public class ScanlineFiller implements Filler {
     public void setColor(int color) {
         this.color = color;
     }
+    
 }

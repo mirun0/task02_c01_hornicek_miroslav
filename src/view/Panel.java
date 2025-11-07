@@ -2,13 +2,14 @@ package view;
 
 import javax.swing.*;
 
+import rasterize.Raster;
 import rasterize.RasterBufferedImage;
 
 import java.awt.*;
 
 public class Panel extends JPanel {
 
-    private final RasterBufferedImage raster;
+    private final Raster raster;
 
     public Panel(int width, int height) {
         setPreferredSize(new Dimension(width, height));
@@ -22,7 +23,7 @@ public class Panel extends JPanel {
         g.drawImage(raster.getImage(), 0, 0, null);
     }
 
-    public RasterBufferedImage getRaster() {
+    public Raster getRaster() {
         return raster;
     }
 }

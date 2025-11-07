@@ -9,7 +9,7 @@ public class LineRasterizerGradient extends LineRasterizer {
     private float length;
     private int colorGradient;
 
-    public LineRasterizerGradient(RasterBufferedImage raster) {
+    public LineRasterizerGradient(Raster raster) {
         super(raster);
         this.length = 0;
     }

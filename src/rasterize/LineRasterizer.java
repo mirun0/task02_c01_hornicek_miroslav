@@ -1,14 +1,14 @@
 package rasterize;
 
 public abstract class LineRasterizer {
-    protected RasterBufferedImage raster;
+    protected Raster raster;
     protected int color;
 
     public void setColor(int color) {
         this.color = color;
     }
 
-    public LineRasterizer(RasterBufferedImage raster) {
+    public LineRasterizer(Raster raster) {
         this.raster = raster;
         this.color = 1;
     }

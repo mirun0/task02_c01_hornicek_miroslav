@@ -3,11 +3,12 @@ package fill;
 import java.util.Stack;
 
 import model.Point;
+import rasterize.Raster;
 import rasterize.RasterBufferedImage;
 
 public class SeedFiller implements Filler {
 
-    private RasterBufferedImage raster;
+    private Raster raster;
     private int x;
     private int y;
     private int color;
@@ -15,7 +16,7 @@ public class SeedFiller implements Filler {
 
     private Stack<Point> stack;
 
-    public SeedFiller(RasterBufferedImage raster, int color) {
+    public SeedFiller(Raster raster, int color) {
         this.raster = raster;
         this.color = color;
         this.backgroundColor = -1;
@@ -30,7 +31,6 @@ public class SeedFiller implements Filler {
         }
         
         if(color != backgroundColor) {
-            System.out.println(x + " " + y);
             seedFill(x, y);
             //seedFillRecursive(x, y);
         }
@@ -51,6 +51,7 @@ public class SeedFiller implements Filler {
 
     }
 
+    // seedfill vyplnujici podle pozadi
     private void seedFill(int x, int y) {
         stack.clear();
         stack.add(new Point(x, y, 0x0));
@@ -64,6 +65,27 @@ public class SeedFiller implements Filler {
                 stack.add(new Point(n.getX() - 1, n.getY(), 0x0));
                 stack.add(new Point(n.getX(), n.getY() + 1, 0x0));
                 stack.add(new Point(n.getX(), n.getY() - 1, 0x0));
+            }
+        }
+    }
+
+    // seedfill vyplnujici podle hranice
+    private void seedFill(int x, int y, int borderColor) {
+        stack.clear();
+        stack.add(new Point(x, y, 0x0));
+
+        while (!stack.empty()) {
+            Point n = stack.pop();
+            if(!raster.getPixel(n.getX(), n.getY()).isEmpty()) {
+                int currentColor = raster.getPixel(n.getX(), n.getY()).get();
+                if (currentColor != color && currentColor != borderColor) {
+                    raster.setPixel(n.getX(), n.getY(), color);
+
+                    stack.add(new Point(n.getX() + 1, n.getY(), 0x0));
+                    stack.add(new Point(n.getX() - 1, n.getY(), 0x0));
+                    stack.add(new Point(n.getX(), n.getY() + 1, 0x0));
+                    stack.add(new Point(n.getX(), n.getY() - 1, 0x0));
+                }
             }
         }
     }

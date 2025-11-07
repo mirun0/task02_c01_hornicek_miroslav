@@ -22,11 +22,6 @@ public class LineCreationHandler implements ModeHandler {
         return activeLine;
     }
 
-    public void setActiveLineNull() {
-        scene.getLines().remove(activeLine);
-        activeLine = null;
-    }
-
     @Override
     public void onMousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
@@ -89,6 +84,10 @@ public class LineCreationHandler implements ModeHandler {
 
     @Override
     public void clear() {
+        activeLine = null;
+    }
+
+    public void setActiveLineNull() {
         activeLine = null;
     }
 

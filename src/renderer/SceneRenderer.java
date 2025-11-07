@@ -1,17 +1,15 @@
 package renderer;
 
 import controller.handler.modeHandler.Action;
-import controller.handler.modeHandler.Mode;
-import fill.SeedFiller;
+//import fill.SeedFiller;
 import fill.scanline.ScanlineFiller;
 import model.Line;
 import model.Point;
 import model.Polygon;
-import model.Seed;
+//import model.Seed;
 import rasterize.LineRasterizerGradient;
 import rasterize.LineRasterizerTrivial;
 import rasterize.Raster;
-import utils.Vec2;
 import world.Scene2D;
 
 public class SceneRenderer {

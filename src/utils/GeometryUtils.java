@@ -4,6 +4,7 @@ import controller.handler.modeHandler.Action;
 import model.Line;
 import model.Point;
 import model.Polygon;
+import model.Rectangle;
 import world.Scene2D;
 
 public class GeometryUtils {
@@ -140,5 +141,31 @@ public class GeometryUtils {
 
     public static Polygon getClosestPolygon() {
         return closestPolygon;
+    }
+
+    public static void moveToHeight(Rectangle activeRectangle, int x, int y) {
+
+        Point A = activeRectangle.getPointA();
+        Point B = activeRectangle.getPointB();
+
+        double dx = B.getX() - A.getX();
+        double dy = B.getY() - A.getY();
+        double len = Math.sqrt(dx*dx + dy*dy);
+        double ux = dx / len;
+        double uy = dy / len;
+
+        double nx = -uy;
+        double ny = ux;
+
+        double mx = x - A.getX();
+        double my = y - A.getY();
+        double height = mx * nx + my * ny;
+
+        activeRectangle.getPointC().setX((int)(B.getX() + nx * height));
+        activeRectangle.getPointC().setY((int)(B.getY() + ny * height));
+
+        activeRectangle.getPointD().setX((int)(A.getX() + nx * height));
+        activeRectangle.getPointD().setY((int)(A.getY() + ny * height));
+
     }
 }

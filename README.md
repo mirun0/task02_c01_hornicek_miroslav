@@ -20,4 +20,4 @@
 [] Bonus2: Při vyplňovaní rastrově i vektorově zadané hranice implementujte také variantu vyplnění útvaru pravidelně se opakujícím vzorem zadaným předpisem v rozhraní PatternFill.
 
 
-- fill musi byt po celou dobu createni polygonu zapnuty, aby i po vytvoreni mel atribut pro fill.
+- fillnuty polygon bude pouze pokud fill je zapnuty pri zacatku kresleni polygonu

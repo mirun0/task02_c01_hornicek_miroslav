@@ -16,6 +16,7 @@ import controller.handler.modeHandler.Mode;
 import controller.handler.modeHandler.ModeHandler;
 import controller.handler.modeHandler.PointSelectionHandler;
 import controller.handler.modeHandler.PolygonCreationHandler;
+import controller.handler.modeHandler.RectangleCreationHandler;
 import model.Seed;
 import renderer.Renderer2D;
 import view.Panel;
@@ -61,6 +62,7 @@ public class Controller2D {
         modeHandlers.put(Mode.POINT_MOVING, new PointSelectionHandler(scene2d));
         modeHandlers.put(Mode.POINT_DELETION, new DeletePointHandler(scene2d));
         modeHandlers.put(Mode.POINT_CREATION, new AddPointHandler(scene2d));
+        modeHandlers.put(Mode.RECTAGLE_CREATION, new RectangleCreationHandler(scene2d));
     }
 
     void initListeners() {
@@ -115,6 +117,7 @@ public class Controller2D {
         if(keyHandler.isModChanged()) {
             ((LineCreationHandler)modeHandlers.get(Mode.LINE_CREATION)).setActiveLineNull();
             ((PolygonCreationHandler)modeHandlers.get(Mode.POLYGON_CREATION)).setActivePolygonNull();
+            ((RectangleCreationHandler)modeHandlers.get(Mode.RECTAGLE_CREATION)).setActiveRectangleNull();
             keyHandler.setModChanged(false);
         }
     }

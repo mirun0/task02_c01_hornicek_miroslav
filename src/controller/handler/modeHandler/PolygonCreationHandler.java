@@ -60,7 +60,7 @@ public class PolygonCreationHandler implements ModeHandler {
             }
         }
 
-        if(activePolygon != null) {
+        if(activePolygon != null && activePolygon.getPoints().size() < 3) {
             if(Action.FILLING.isOn()) {
                 activePolygon.setFillColor(Optional.of(0xff00f0));
             } else {

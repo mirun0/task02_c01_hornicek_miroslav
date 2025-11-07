@@ -24,6 +24,7 @@ public class RectangleCreationHandler implements ModeHandler {
         lineCreated = false;
         pointBmoving = false;
     }
+    
 
     @Override
     public void onMousePressed(MouseEvent e) {

@@ -19,6 +19,7 @@ public class PolygonCreationHandler implements ModeHandler {
         this.activePolygon = null;
         this.scene = scene;
     }
+    
 
     public Polygon getActivePolygon() {
         return activePolygon;

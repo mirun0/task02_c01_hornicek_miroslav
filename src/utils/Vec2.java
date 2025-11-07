@@ -1,19 +1,33 @@
 package utils;
 
 public class Vec2 {
-    private int x;
-    private int y;
+    private float x;
+    private float y;
 
     public Vec2(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    public Vec2(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public Vec2 normalize() {
+        float len = (float)Math.sqrt(x*x + y*y);
+        return new Vec2(x / len, y / len);
+    }
+
+    public float cross(Vec2 vec) {
+        return this.x * vec.y - this.y * vec.x;
+    }
+
+    public float getX() {
         return x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 

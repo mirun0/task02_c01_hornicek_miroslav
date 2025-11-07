@@ -12,6 +12,7 @@ public class DeletePointHandler implements ModeHandler {
     public DeletePointHandler(Scene2D scene) {
         this.scene = scene;
     }
+    
 
     @Override
     public void onMousePressed(MouseEvent e) {

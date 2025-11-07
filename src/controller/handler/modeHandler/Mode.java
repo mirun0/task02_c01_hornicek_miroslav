@@ -7,4 +7,5 @@ public enum Mode {
     POINT_MOVING,
     POINT_CREATION,
     POINT_DELETION,
+    POLYGON_CLIPPING
 }

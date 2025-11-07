@@ -15,6 +15,7 @@ import controller.handler.modeHandler.LineCreationHandler;
 import controller.handler.modeHandler.Mode;
 import controller.handler.modeHandler.ModeHandler;
 import controller.handler.modeHandler.PointSelectionHandler;
+import controller.handler.modeHandler.PolygonClippingHandler;
 import controller.handler.modeHandler.PolygonCreationHandler;
 import controller.handler.modeHandler.RectangleCreationHandler;
 import model.Seed;
@@ -25,7 +26,11 @@ import world.Scene2D;
 public class Controller2D {
 
     private Panel panel;
+
     private Scene2D scene2d;
+    private Scene2D clipScene;
+
+    private Scene2D activeScene;
 
     private int w;
     private int h;
@@ -43,7 +48,10 @@ public class Controller2D {
         this.h = panel.getRaster().getHeight();
 
         this.scene2d = new Scene2D();
-        this.renderer2d = new Renderer2D(panel.getRaster(), scene2d);
+        this.clipScene = new Scene2D();
+        this.activeScene = scene2d;
+
+        this.renderer2d = new Renderer2D(panel.getRaster(), activeScene);
         this.renderRequester = new RenderRequester(this);
 
         this.keyHandler = new KeyHandler();
@@ -63,6 +71,7 @@ public class Controller2D {
         modeHandlers.put(Mode.POINT_DELETION, new DeletePointHandler(scene2d));
         modeHandlers.put(Mode.POINT_CREATION, new AddPointHandler(scene2d));
         modeHandlers.put(Mode.RECTAGLE_CREATION, new RectangleCreationHandler(scene2d));
+        modeHandlers.put(Mode.POLYGON_CLIPPING, new PolygonClippingHandler(clipScene));
     }
 
     void initListeners() {
@@ -90,10 +99,9 @@ public class Controller2D {
                 break;
             }
         }
+        updateModChange();
 
-        updateActive();
-
-        renderer2d.render(keyHandler.getActiveMode(), w, h);
+        renderer2d.render(activeScene, keyHandler.getActiveMode(), w, h);
         panel.repaint();
     }
 
@@ -106,15 +114,21 @@ public class Controller2D {
                 Action.CLEAR.setOff();
             }
         }
+        updateModChange();
 
-        updateActive();
-
-        renderer2d.render(keyHandler.getActiveMode(), w, h);
+        renderer2d.render(activeScene, keyHandler.getActiveMode(), w, h);
         panel.repaint();
     }
 
-    private void updateActive() {
+    private void updateModChange() {
         if(keyHandler.isModChanged()) {
+
+            if(keyHandler.getActiveMode() == Mode.POLYGON_CLIPPING) {
+                activeScene = clipScene;
+            } else {
+                activeScene = scene2d;
+            }
+
             ((LineCreationHandler)modeHandlers.get(Mode.LINE_CREATION)).setActiveLineNull();
             ((PolygonCreationHandler)modeHandlers.get(Mode.POLYGON_CREATION)).setActivePolygonNull();
             ((RectangleCreationHandler)modeHandlers.get(Mode.RECTAGLE_CREATION)).setActiveRectangleNull();

@@ -17,6 +17,7 @@ public class LineCreationHandler implements ModeHandler {
         this.activeLine = null;
         this.scene = scene;
     }
+    
 
     public Line getActiveLine() {
         return activeLine;

@@ -17,6 +17,7 @@ public class PointSelectionHandler implements ModeHandler {
         this.scene = scene;
         this.closestPoint = null;
     }
+    
 
     @Override
     public void onMousePressed(MouseEvent e) {

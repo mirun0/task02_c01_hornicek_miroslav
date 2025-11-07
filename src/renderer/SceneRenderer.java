@@ -14,7 +14,7 @@ import world.Scene2D;
 
 public class SceneRenderer {
 
-    private final Scene2D scene;
+    private Scene2D scene;
     private final Raster raster;
 
     private final LineRasterizerTrivial lineRasterizerTrivial;
@@ -22,8 +22,7 @@ public class SceneRenderer {
     //private final SeedFiller seedFiller;
     private final ScanlineFiller scanlineFiller;
 
-    public SceneRenderer(Raster raster, Scene2D scene) {
-        this.scene = scene;
+    public SceneRenderer(Raster raster) {
         this.raster = raster;
 
         this.lineRasterizerTrivial = new LineRasterizerTrivial(raster);
@@ -32,7 +31,8 @@ public class SceneRenderer {
         this.scanlineFiller = new ScanlineFiller(raster, 0x00ff00);
     }
 
-    public void renderScene() {
+    public void renderScene(Scene2D scene) {
+        this.scene = scene;
         if(Action.FILLING.isOn()) {
             renderFill();   
         }
@@ -60,7 +60,7 @@ public class SceneRenderer {
             seedFiller.fill();
         }*/
         for(Polygon polygon : scene.getPolygons()) {
-            if(polygon.getFillColor() != null) {
+            if(polygon.getFillColor().isPresent()) {
                 scanlineFiller.setPolygon(polygon);
                 scanlineFiller.setColor(polygon.getFillColor().get());
                 scanlineFiller.fill();
@@ -96,10 +96,9 @@ public class SceneRenderer {
     }
 
     private void drawPolygon(Polygon polygon) {
-        for (int i = 0; i < polygon.size() - 1; i++) {
-            drawLine(new Line(polygon.getPoints().get(i), polygon.getPoints().get(i + 1)));
+        for (int i = 0; i < polygon.size(); i++) {
+            drawLine(new Line(polygon.getPoints().get(i), polygon.getPoints().get((i + 1) % polygon.size())));
         }
-        drawLine(new Line(polygon.getPoints().get(polygon.size() - 1), polygon.getPoints().get(0)));
     }
 
     private void drawPoint(Point p) {

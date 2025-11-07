@@ -22,7 +22,7 @@ public class KeyHandler extends KeyAdapter {
         this.activeMode = Mode.POINT_MOVING;
         this.modChanged = false;
 
-        validModeKeys.addAll(Arrays.asList(KeyEvent.VK_B, KeyEvent.VK_ESCAPE, KeyEvent.VK_V, KeyEvent.VK_N, KeyEvent.VK_D, KeyEvent.VK_R));
+        validModeKeys.addAll(Arrays.asList(KeyEvent.VK_B, KeyEvent.VK_ESCAPE, KeyEvent.VK_V, KeyEvent.VK_N, KeyEvent.VK_D, KeyEvent.VK_R, KeyEvent.VK_Q));
         validNormalKeys.addAll(Arrays.asList(KeyEvent.VK_SHIFT, KeyEvent.VK_C, KeyEvent.VK_G, KeyEvent.VK_F));
     }
 
@@ -79,6 +79,11 @@ public class KeyHandler extends KeyAdapter {
                 }
                 case KeyEvent.VK_R: {
                     activeMode = Mode.RECTAGLE_CREATION;
+                    break;
+                }
+                case KeyEvent.VK_Q: {
+                    activeMode = Mode.POLYGON_CLIPPING;
+                    break;
                 }
                 
             }

@@ -10,14 +10,14 @@
 [DONE] Kliknutím vyberte počáteční pixel záplavového algoritmu a plochu vybarvěte.
 [DONE] Uvažujte dvě možnosti hraniční podmínky vyplňování. Jednak omezení barvou pozadí a jednak barvou hranice.
 
-[] Implementujte funkci pro kreslení obdelníka zadaného základnou a třetím bodem jehož vzdálenost od základny určuje jeho výšku. Zadání základny obdelníka: stisk plus tažení myši, výška obdelníka: výběr bodu kliknutím v prostoru. Pro uložení vytvořte speciální třídu dědící z třídy Polygon.
+[DONE] Implementujte funkci pro kreslení obdelníka zadaného základnou a třetím bodem jehož vzdálenost od základny určuje jeho výšku. Zadání základny obdelníka: stisk plus tažení myši, výška obdelníka: výběr bodu kliknutím v prostoru. Pro uložení vytvořte speciální třídu dědící z třídy Polygon.
 
-[] Implementujte algoritmus ořezání libovolného uzavřeného n-úhelníku konvexním polygonem. Ořezávací polygon může být fixně zadán a musí mít alespoň pět vrcholů. Oba útvary, ořezávaný i ořezávací, jsou zadány polygonem tvořících jejich obvod (geometricky zadaná hranice). Ořezávací polygon uvažujte pouze jako konvexní, případně s kladnou i zápornou orientací vrcholů.
-[] Implementujte Scan-line algoritmus vyplnění geometricky zadané plochy n-úhelníku, který je výsledkem ořezání v předchozím kroku.
+[DONE] Implementujte algoritmus ořezání libovolného uzavřeného n-úhelníku konvexním polygonem. Ořezávací polygon může být fixně zadán a musí mít alespoň pět vrcholů. Oba útvary, ořezávaný i ořezávací, jsou zadány polygonem tvořících jejich obvod (geometricky zadaná hranice). Ořezávací polygon uvažujte pouze jako konvexní, případně s kladnou i zápornou orientací vrcholů.
+[DONE] Implementujte Scan-line algoritmus vyplnění geometricky zadané plochy n-úhelníku, který je výsledkem ořezání v předchozím kroku.
 
 [DONE] Implementujte funkci na klávesu C pro mazání plátna a všech datových struktur.
 [DONE] Bonus: Doplňte možnost editace již zadaného n-úhelníku, změna pozice vrcholu, případně smazání stávajícího či přidání nového vrcholu.
-[] Bonus2: Při vyplňovaní rastrově i vektorově zadané hranice implementujte také variantu vyplnění útvaru pravidelně se opakujícím vzorem zadaným předpisem v rozhraní PatternFill.
+[DONE] Bonus2: Při vyplňovaní rastrově i vektorově zadané hranice implementujte také variantu vyplnění útvaru pravidelně se opakujícím vzorem zadaným předpisem v rozhraní PatternFill.
 
 
 - fillnuty polygon bude pouze pokud fill je zapnuty pri zacatku kresleni polygonu

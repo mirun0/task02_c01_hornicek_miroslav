@@ -12,6 +12,7 @@ public class AddPointHandler implements ModeHandler {
     public AddPointHandler(Scene2D scene) {
         this.scene = scene;
     }
+    
 
     @Override
     public void onMousePressed(MouseEvent e) {
@@ -37,5 +38,4 @@ public class AddPointHandler implements ModeHandler {
     public void clear() {
         
     }
-    
 }

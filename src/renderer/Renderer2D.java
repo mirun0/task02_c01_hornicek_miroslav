@@ -16,14 +16,14 @@ public class Renderer2D {
     public Renderer2D(Raster raster, Scene2D scene) {
         this.raster = raster;
 
-        this.sceneRenderer = new SceneRenderer(raster, scene);
+        this.sceneRenderer = new SceneRenderer(raster);
         this.uiRenderer = new UIRenderer(raster.getGraphics());
     }
 
-    public void render(Mode mode, int width, int height) {
+    public void render(Scene2D scene, Mode mode, int width, int height) {
         raster.clear(Color.BLACK);
 
-        sceneRenderer.renderScene();
+        sceneRenderer.renderScene(scene);
 
         renderUI(mode, width, height);
     }

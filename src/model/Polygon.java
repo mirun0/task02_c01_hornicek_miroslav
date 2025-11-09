@@ -1,16 +1,15 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class Polygon {
     
     private ArrayList<Point> points;
-    private Optional<Integer> fillColor;
+    private boolean fill;
 
-    public Polygon(ArrayList<Point> points, Optional<Integer> fillColor) {
+    public Polygon(ArrayList<Point> points, boolean fill) {
         this.points = points;
-        this.fillColor = fillColor;
+        this.fill = fill;
     }
 
     public int size() {
@@ -25,12 +24,12 @@ public class Polygon {
         return points;
     }
 
-    public Optional<Integer> getFillColor() {
-        return fillColor;
+    public boolean getFill() {
+        return fill;
     }
 
-    public void setFillColor(Optional<Integer> fillColor) {
-        this.fillColor = fillColor;
+    public void setFill(boolean fill) {
+        this.fill = fill;
     }
 
     public void clear() {

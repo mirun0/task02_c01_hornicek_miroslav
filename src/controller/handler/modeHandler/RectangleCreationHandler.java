@@ -33,7 +33,7 @@ public class RectangleCreationHandler implements ModeHandler {
                 ArrayList<Point> points = new ArrayList<>();
                 points.add(new Point(e.getX(), e.getY(), 0xffff00)); // a
                 points.add(new Point(e.getX(), e.getY(), 0xff0000)); // b
-                activeRectangle = new Rectangle(points, null);
+                activeRectangle = new Rectangle(points, false);
                 scene.getPolygons().add(activeRectangle);
                 pointBmoving = true;
                 if (Action.GRADIENT.isOn()) {
@@ -63,9 +63,9 @@ public class RectangleCreationHandler implements ModeHandler {
 
         if(activeRectangle != null && activeRectangle.getPoints().size() < 3) {
             if(Action.FILLING.isOn()) {
-                activeRectangle.setFillColor(Optional.of(0xff00f0));
+                activeRectangle.setFill(true);
             } else {
-                activeRectangle.setFillColor(null);
+                activeRectangle.setFill(false);
             }
         }
     }

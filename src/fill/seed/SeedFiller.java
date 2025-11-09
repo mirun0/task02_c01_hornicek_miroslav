@@ -1,7 +1,9 @@
-package fill;
+package fill.seed;
 
 import java.util.Stack;
 
+import fill.Fillable;
+import fill.Filler;
 import model.Point;
 import rasterize.Raster;
 import rasterize.RasterBufferedImage;
@@ -25,7 +27,7 @@ public class SeedFiller implements Filler {
 
 
     @Override
-    public void fill() {
+    public void fill(Fillable fillable) {
         if(!raster.getPixel(x, y).isEmpty()) {
             backgroundColor = raster.getPixel(x, y).get();
         }

@@ -1,6 +1,8 @@
 package controller.handler.modeHandler;
 
-public enum Mode {
+import renderer.ui.Toolable;
+
+public enum Mode implements Toolable {
     LINE_CREATION,
     POLYGON_CREATION,
     RECTAGLE_CREATION,

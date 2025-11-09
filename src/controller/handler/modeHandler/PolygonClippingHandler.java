@@ -27,6 +27,22 @@ public class PolygonClippingHandler implements ModeHandler {
     }
 
     private void createScene() {
+
+        ArrayList<Point> points = new ArrayList<>();
+        points.add(new Point(100, 100, 0x00ffff));
+        points.add(new Point(500, 300, 0x00ffff));
+        points.add(new Point(200, 300, 0x00ffff));
+        clippingPolygon = new Polygon(points, false);
+        scene.getPolygons().add(clippingPolygon);
+
+        points = new ArrayList<>();
+        points.add(new Point(300, 100, 0xff00ff));
+        points.add(new Point(500, 200, 0xff00ff));
+        points.add(new Point(200, 400, 0xff00ff));
+        subjectPolygon = new Polygon(points, false);
+        scene.getPolygons().add(subjectPolygon);
+
+        /*
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(161, 61, 0x00ffff));
         points.add(new Point(319, 111, 0x00ffff));
@@ -34,7 +50,7 @@ public class PolygonClippingHandler implements ModeHandler {
         points.add(new Point(214, 487, 0x00ffff));
         points.add(new Point(43, 394, 0x00ffff));
         points.add(new Point(40, 169, 0x00ffff));
-        clippingPolygon = new Polygon(points, Optional.empty());
+        clippingPolygon = new Polygon(points, false);
         scene.getPolygons().add(clippingPolygon);
 
         points = new ArrayList<>();
@@ -44,15 +60,14 @@ public class PolygonClippingHandler implements ModeHandler {
         points.add(new Point(421, 455, 0xff00ff));
         points.add(new Point(278, 356, 0xff00ff));
         points.add(new Point(220, 194, 0xff00ff));
-        subjectPolygon = new Polygon(points, Optional.empty());
+        subjectPolygon = new Polygon(points, false);
         scene.getPolygons().add(subjectPolygon);
-
+        */
         cliper = new Clipper();
         clipped = cliper.clip(clippingPolygon, subjectPolygon);
-        clipped.setFillColor(Optional.of(0xff0000));
+        clipped.setFill(true);
         scene.getPolygons().add(clipped);
 
-        Action.FILLING.setOn();
     }
 
     @Override
@@ -76,12 +91,14 @@ public class PolygonClippingHandler implements ModeHandler {
             return;
         }
 
+        /*
         closestPoint.setX(e.getX());
         closestPoint.setY(e.getY());
         scene.getPolygons().remove(clipped);
         clipped = cliper.clip(clippingPolygon, subjectPolygon);
-        clipped.setFillColor(Optional.of(0xff0000));
+        clipped.setFill(true);
         scene.getPolygons().add(clipped);
+        */
     }
 
     @Override

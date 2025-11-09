@@ -2,7 +2,9 @@ package fill.scanline;
 
 import java.awt.Color;
 
-public class Pattern {
+import fill.Fillable;
+
+public class Pattern implements Fillable {
 
     private int width;
     private int height;

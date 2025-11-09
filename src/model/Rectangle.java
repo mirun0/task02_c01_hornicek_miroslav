@@ -1,12 +1,11 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class Rectangle extends Polygon {
 
-    public Rectangle(ArrayList<Point> points, Optional<Integer> fillColor) {
-        super(points, fillColor);
+    public Rectangle(ArrayList<Point> points, boolean fill) {
+        super(points, fill);
     }
 
     public Point getPointA() {

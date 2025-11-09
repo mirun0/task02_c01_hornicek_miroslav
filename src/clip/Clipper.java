@@ -19,7 +19,7 @@ public class Clipper {
 
         for (int i = 0; i < clippingPolygon.getPoints().size(); i++) {
             Polygon inputPolygon = outputPolygon;
-            outputPolygon = new Polygon(new ArrayList<>(), Optional.empty());
+            outputPolygon = new Polygon(new ArrayList<>(), false);
 
             Point A = clippingPolygon.getPoints().get(i);
             Point B = clippingPolygon.getPoints().get((i + 1) % clippingPolygon.getPoints().size());
@@ -34,9 +34,11 @@ public class Clipper {
             for (Point p2 : inputPolygon.getPoints()) {
                 boolean p1Inside = isInsideEdge(p1, clipEdge);
                 if (isInsideEdge(p2, clipEdge)) {
+                    System.out.println("P2 inside clip edge");
                     if (!p1Inside) {
                         Point intersect = intersection(p1, p2, clipEdge);
                         if (intersect != null) {
+                            System.out.println("P1 not inside clip edge, calculating intersection P1 -> P2");
                             outputPolygon.getPoints().add(intersect);
                         }
                     }
@@ -44,6 +46,7 @@ public class Clipper {
                 } else if (p1Inside) {
                     Point intersect = intersection(p1, p2, clipEdge);
                     if (intersect != null) {
+                        System.out.println("P1 inside clip edge, calculating intersection P1 -> P2");
                         outputPolygon.getPoints().add(intersect);
                     }
                 }

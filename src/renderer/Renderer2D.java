@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import controller.handler.modeHandler.Mode;
 import rasterize.Raster;
+import renderer.ui.UIRenderer;
 import world.Scene2D;
 
 public class Renderer2D {

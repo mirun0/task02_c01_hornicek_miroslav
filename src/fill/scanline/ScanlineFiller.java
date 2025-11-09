@@ -3,7 +3,10 @@ package fill.scanline;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import fill.Fill;
+import fill.Fillable;
 import fill.Filler;
+import fill.GlobalFills;
 import model.Polygon;
 import model.Point;
 import rasterize.Raster;
@@ -93,7 +96,15 @@ public class ScanlineFiller implements Filler {
     }*/
 
     @Override
-    public void fill() {
+    public void fill(Fillable fillable) {
+
+        boolean pattern = false;
+        if(fillable instanceof Fill) {
+            pattern = false;
+        } else {
+            pattern = true;
+        }
+
         ArrayList<EdgeTableEntry> et = new ArrayList<>();
         for (int i = 0; i < polygon.size(); i++) {
             Point a = polygon.getPoints().get(i);
@@ -148,9 +159,15 @@ public class ScanlineFiller implements Filler {
                 }
 
                 for (int x = xStart + 1; x < xEnd; x++) {
-                    int m = (x / Pattern.rocketPattern.getScale()) % Pattern.rocketPattern.getWidth();
-                    int n = ((int)yPointer / Pattern.rocketPattern.getScale()) % Pattern.rocketPattern.getHeight();
-                    int c = Pattern.rocketPattern.getPixel(m, n);
+                    int c = 0;
+                    if(pattern) {
+                        Pattern p = ((Pattern)fillable);
+                        int m = (x / p.getScale()) % p.getWidth();
+                        int n = ((int)yPointer / p.getScale()) % p.getHeight();
+                        c = p.getPixel(m, n);
+                    } else {
+                        c = ((Fill)fillable).getColor();
+                    }
 
                     raster.setPixel(x, (int) yPointer, c);
                 }

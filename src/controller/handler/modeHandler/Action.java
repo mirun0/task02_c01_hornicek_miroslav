@@ -3,7 +3,9 @@ package controller.handler.modeHandler;
 import java.util.EnumMap;
 import java.util.Map;
 
-public enum Action {
+import renderer.ui.Toolable;
+
+public enum Action implements Toolable {
     SNAP,
     CLEAR,
     GRADIENT,

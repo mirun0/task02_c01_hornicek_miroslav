@@ -41,7 +41,7 @@ public class PolygonCreationHandler implements ModeHandler {
                     b.setColor(RandomColor.create());
                 }
                 points.add(b);
-                activePolygon = new Polygon(points, null);
+                activePolygon = new Polygon(points, false);
                 scene.getPolygons().add(activePolygon);
             } else {
                 Point p = new Point(e.getX(), e.getY(), 0xffffff);
@@ -63,9 +63,9 @@ public class PolygonCreationHandler implements ModeHandler {
 
         if(activePolygon != null && activePolygon.getPoints().size() < 3) {
             if(Action.FILLING.isOn()) {
-                activePolygon.setFillColor(Optional.of(0xff00f0));
+                activePolygon.setFill(true);
             } else {
-                activePolygon.setFillColor(null);
+                activePolygon.setFill(false);
             }
         }
     }

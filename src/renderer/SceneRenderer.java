@@ -1,6 +1,7 @@
 package renderer;
 
 import controller.handler.modeHandler.Action;
+import fill.GlobalFills;
 //import fill.SeedFiller;
 import fill.scanline.ScanlineFiller;
 import model.Line;
@@ -60,10 +61,9 @@ public class SceneRenderer {
             seedFiller.fill();
         }*/
         for(Polygon polygon : scene.getPolygons()) {
-            if(polygon.getFillColor().isPresent()) {
+            if(polygon.getFill()) {
                 scanlineFiller.setPolygon(polygon);
-                scanlineFiller.setColor(polygon.getFillColor().get());
-                scanlineFiller.fill();
+                scanlineFiller.fill(GlobalFills.activeFill);
             }
         }
     }
@@ -77,7 +77,9 @@ public class SceneRenderer {
         for (Polygon polygon : scene.getPolygons()) {
             for (Point p : polygon.getPoints()) {
                 drawPoint(p);
+                System.out.println(p.getX() + " " + p.getY());
             }
+            System.out.println("----");
         }
     }
 

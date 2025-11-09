@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import controller.handler.modeHandler.Action;
 import controller.handler.modeHandler.Mode;
+import fill.GlobalFills;
 
 public class KeyHandler extends KeyAdapter {
 
@@ -87,6 +88,19 @@ public class KeyHandler extends KeyAdapter {
                 }
                 
             }
+        }
+
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT: {
+                GlobalFills.back();
+                break;
+            }
+            case KeyEvent.VK_RIGHT: {
+                GlobalFills.next();
+                break;
+            }        
+            default:
+                break;
         }
     }
 

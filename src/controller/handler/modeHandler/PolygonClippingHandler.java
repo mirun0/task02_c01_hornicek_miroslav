@@ -2,7 +2,6 @@ package controller.handler.modeHandler;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import clip.Clipper;
 import model.Point;
@@ -28,6 +27,7 @@ public class PolygonClippingHandler implements ModeHandler {
 
     private void createScene() {
 
+        /*
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(100, 100, 0x00ffff));
         points.add(new Point(500, 300, 0x00ffff));
@@ -41,8 +41,7 @@ public class PolygonClippingHandler implements ModeHandler {
         points.add(new Point(200, 400, 0xff00ff));
         subjectPolygon = new Polygon(points, false);
         scene.getPolygons().add(subjectPolygon);
-
-        /*
+        */
         ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(161, 61, 0x00ffff));
         points.add(new Point(319, 111, 0x00ffff));
@@ -62,7 +61,7 @@ public class PolygonClippingHandler implements ModeHandler {
         points.add(new Point(220, 194, 0xff00ff));
         subjectPolygon = new Polygon(points, false);
         scene.getPolygons().add(subjectPolygon);
-        */
+
         cliper = new Clipper();
         clipped = cliper.clip(clippingPolygon, subjectPolygon);
         clipped.setFill(true);
@@ -91,14 +90,12 @@ public class PolygonClippingHandler implements ModeHandler {
             return;
         }
 
-        /*
         closestPoint.setX(e.getX());
         closestPoint.setY(e.getY());
         scene.getPolygons().remove(clipped);
         clipped = cliper.clip(clippingPolygon, subjectPolygon);
         clipped.setFill(true);
         scene.getPolygons().add(clipped);
-        */
     }
 
     @Override

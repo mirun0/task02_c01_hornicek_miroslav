@@ -42,7 +42,7 @@ public class PointSelectionHandler implements ModeHandler {
         }
 
         // snapuje pouze na jednu stranu
-        if(Action.SNAP.isOn() && closestPolygon.getPoints().contains(closestPoint)) {
+        if(Action.SNAP.isOn() && closestPolygon != null && closestPolygon.getPoints().contains(closestPoint)) {
             int index = closestPolygon.getPoints().indexOf(closestPoint);
             int nextIndex = (index + 1) % closestPolygon.getPoints().size();
             Point startPoint = closestPolygon.getPoints().get(nextIndex);

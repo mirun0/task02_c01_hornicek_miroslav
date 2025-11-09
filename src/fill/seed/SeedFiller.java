@@ -6,7 +6,6 @@ import fill.Fillable;
 import fill.Filler;
 import model.Point;
 import rasterize.Raster;
-import rasterize.RasterBufferedImage;
 
 public class SeedFiller implements Filler {
 
@@ -38,6 +37,7 @@ public class SeedFiller implements Filler {
         }
     }
 
+    @SuppressWarnings("unused")
     private void seedFillRecursive(int x, int y) {
         
         if(raster.getPixel(x, y).isEmpty() || raster.getPixel(x, y).get() != backgroundColor) {
@@ -72,6 +72,7 @@ public class SeedFiller implements Filler {
     }
 
     // seedfill vyplnujici podle hranice
+    @SuppressWarnings("unused")
     private void seedFill(int x, int y, int borderColor) {
         stack.clear();
         stack.add(new Point(x, y, 0x0));

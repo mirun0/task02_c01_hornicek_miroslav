@@ -18,7 +18,6 @@ import controller.handler.modeHandler.PointSelectionHandler;
 import controller.handler.modeHandler.PolygonClippingHandler;
 import controller.handler.modeHandler.PolygonCreationHandler;
 import controller.handler.modeHandler.RectangleCreationHandler;
-import model.Seed;
 import renderer.Renderer2D;
 import view.Panel;
 import world.Scene2D;
@@ -107,12 +106,14 @@ public class Controller2D {
 
     public void update(KeyEvent e) {
         if(Action.CLEAR.isOn()) { 
-            for (Mode mode : modeHandlers.keySet()) {
-                ModeHandler modeHandler = modeHandlers.get(mode);
-                modeHandler.clear();
-                clear();
-                Action.CLEAR.setOff();
+            if(activeScene == scene2d) {
+                for (Mode mode : modeHandlers.keySet()) {
+                    ModeHandler modeHandler = modeHandlers.get(mode);
+                    modeHandler.clear();
+                    clear();
+                }
             }
+            Action.CLEAR.setOff();
         }
         updateModChange();
 

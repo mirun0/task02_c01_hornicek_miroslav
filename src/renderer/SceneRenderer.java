@@ -29,7 +29,7 @@ public class SceneRenderer {
         this.lineRasterizerTrivial = new LineRasterizerTrivial(raster);
         this.lineRasterizerGradient = new LineRasterizerGradient(raster);
         //this.seedFiller = new SeedFiller(raster, 0x00ff00);
-        this.scanlineFiller = new ScanlineFiller(raster, 0x00ff00);
+        this.scanlineFiller = new ScanlineFiller(raster);
     }
 
     public void renderScene(Scene2D scene) {
@@ -77,9 +77,7 @@ public class SceneRenderer {
         for (Polygon polygon : scene.getPolygons()) {
             for (Point p : polygon.getPoints()) {
                 drawPoint(p);
-                System.out.println(p.getX() + " " + p.getY());
             }
-            System.out.println("----");
         }
     }
 

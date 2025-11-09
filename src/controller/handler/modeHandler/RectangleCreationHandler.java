@@ -2,12 +2,10 @@ package controller.handler.modeHandler;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import model.Point;
 import model.Rectangle;
 import utils.GeometryUtils;
-import utils.RandomColor;
 import world.Scene2D;
 
 public class RectangleCreationHandler implements ModeHandler {
@@ -37,7 +35,6 @@ public class RectangleCreationHandler implements ModeHandler {
                 scene.getPolygons().add(activeRectangle);
                 pointBmoving = true;
                 if (Action.GRADIENT.isOn()) {
-                    // TODO: doresit gradient
                     //activeRectangle.getPoints().get(0).setColor(RandomColor.create());
                     //activeRectangle.getPoints().get(1).setColor(RandomColor.create());
                 }

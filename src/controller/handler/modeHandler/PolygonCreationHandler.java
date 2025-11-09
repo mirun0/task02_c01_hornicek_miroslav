@@ -2,7 +2,6 @@ package controller.handler.modeHandler;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Optional;
 
 import model.Point;
 import model.Polygon;

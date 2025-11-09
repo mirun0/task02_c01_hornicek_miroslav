@@ -6,7 +6,6 @@ import java.util.Comparator;
 import fill.Fill;
 import fill.Fillable;
 import fill.Filler;
-import fill.GlobalFills;
 import model.Polygon;
 import model.Point;
 import rasterize.Raster;
@@ -14,12 +13,10 @@ import rasterize.Raster;
 public class ScanlineFiller implements Filler {
 
     private Raster raster;
-    private int color;
     private Polygon polygon;
 
-    public ScanlineFiller(Raster raster, int color) {
+    public ScanlineFiller(Raster raster) {
         this.raster = raster;
-        this.color = color;
     }
 
     /*
@@ -184,10 +181,6 @@ public class ScanlineFiller implements Filler {
 
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
     }
     
 }

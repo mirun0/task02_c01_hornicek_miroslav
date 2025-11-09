@@ -1,7 +1,6 @@
 package clip;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import model.Line;
 import model.Point;
@@ -34,11 +33,9 @@ public class Clipper {
             for (Point p2 : inputPolygon.getPoints()) {
                 boolean p1Inside = isInsideEdge(p1, clipEdge);
                 if (isInsideEdge(p2, clipEdge)) {
-                    System.out.println("P2 inside clip edge");
                     if (!p1Inside) {
                         Point intersect = intersection(p1, p2, clipEdge);
                         if (intersect != null) {
-                            System.out.println("P1 not inside clip edge, calculating intersection P1 -> P2");
                             outputPolygon.getPoints().add(intersect);
                         }
                     }
@@ -46,7 +43,6 @@ public class Clipper {
                 } else if (p1Inside) {
                     Point intersect = intersection(p1, p2, clipEdge);
                     if (intersect != null) {
-                        System.out.println("P1 inside clip edge, calculating intersection P1 -> P2");
                         outputPolygon.getPoints().add(intersect);
                     }
                 }

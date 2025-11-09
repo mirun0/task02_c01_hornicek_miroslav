@@ -145,27 +145,19 @@ public class GeometryUtils {
 
     public static void moveToHeight(Rectangle activeRectangle, int x, int y) {
 
-        Point A = activeRectangle.getPointA();
-        Point B = activeRectangle.getPointB();
+        Vec2 A = Vec2.fromPoint(activeRectangle.getPointA());
+        Vec2 B = Vec2.fromPoint(activeRectangle.getPointB());
+        Vec2 M = new Vec2(x, y);
 
-        double dx = B.getX() - A.getX();
-        double dy = B.getY() - A.getY();
-        double len = Math.sqrt(dx*dx + dy*dy);
-        double ux = dx / len;
-        double uy = dy / len;
+        Vec2 dirAB = A.direction(B).normalize();
+        Vec2 normal = dirAB.normal();
 
-        double nx = -uy;
-        double ny = ux;
+        Vec2 dirAM = A.direction(M);
+        float height = dirAM.dot(normal);
 
-        double mx = x - A.getX();
-        double my = y - A.getY();
-        double height = mx * nx + my * ny;
+        Vec2 normalOffset = normal.scale(height); 
 
-        activeRectangle.getPointC().setX((int)(B.getX() + nx * height));
-        activeRectangle.getPointC().setY((int)(B.getY() + ny * height));
-
-        activeRectangle.getPointD().setX((int)(A.getX() + nx * height));
-        activeRectangle.getPointD().setY((int)(A.getY() + ny * height));
-
+        activeRectangle.getPointC().set(B.add(normalOffset));
+        activeRectangle.getPointD().set(A.add(normalOffset));
     }
 }

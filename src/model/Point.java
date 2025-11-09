@@ -1,5 +1,7 @@
 package model;
 
+import utils.Vec2;
+
 public class Point {
     
     private int x;
@@ -36,6 +38,11 @@ public class Point {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void set(Vec2 vec) {
+        this.x = (int)vec.getX();
+        this.y = (int)vec.getY();
     }
 
     public void setColor(int color) {

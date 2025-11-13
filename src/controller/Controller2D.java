@@ -106,17 +106,16 @@ public class Controller2D {
 
     public void update(KeyEvent e) {
         if(Action.CLEAR.isOn()) { 
-            if(activeScene == scene2d) {
                 for (Mode mode : modeHandlers.keySet()) {
-                    ModeHandler modeHandler = modeHandlers.get(mode);
-                    modeHandler.clear();
-                    clear();
+                    if(mode != Mode.POLYGON_CLIPPING) {
+                        ModeHandler modeHandler = modeHandlers.get(mode);
+                        modeHandler.clear();
+                        clear();
+                    }
                 }
-            }
             Action.CLEAR.setOff();
         }
         updateModChange();
-
         renderer2d.render(activeScene, keyHandler.getActiveMode(), w, h);
         panel.repaint();
     }

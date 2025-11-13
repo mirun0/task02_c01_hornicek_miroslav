@@ -15,7 +15,7 @@ public class PolygonClippingHandler implements ModeHandler {
     Polygon clippingPolygon;
     Polygon subjectPolygon;
 
-    Clipper cliper;
+    Clipper clipper;
     Polygon clipped;
 
     Point closestPoint;
@@ -62,8 +62,8 @@ public class PolygonClippingHandler implements ModeHandler {
         subjectPolygon = new Polygon(points, false);
         scene.getPolygons().add(subjectPolygon);
 
-        cliper = new Clipper();
-        clipped = cliper.clip(clippingPolygon, subjectPolygon);
+        clipper = new Clipper();
+        clipped = clipper.clip(clippingPolygon, subjectPolygon);
         clipped.setFill(true);
         scene.getPolygons().add(clipped);
 
@@ -86,14 +86,14 @@ public class PolygonClippingHandler implements ModeHandler {
 
     @Override
     public void onMouseDragged(MouseEvent e) {
-        if(closestPoint == null || cliper == null) {
+        if(closestPoint == null || clipper == null) {
             return;
         }
 
         closestPoint.setX(e.getX());
         closestPoint.setY(e.getY());
         scene.getPolygons().remove(clipped);
-        clipped = cliper.clip(clippingPolygon, subjectPolygon);
+        clipped = clipper.clip(clippingPolygon, subjectPolygon);
         clipped.setFill(true);
         scene.getPolygons().add(clipped);
     }
@@ -102,7 +102,7 @@ public class PolygonClippingHandler implements ModeHandler {
     public void clear() {
         clippingPolygon = null;
         subjectPolygon = null;
-        cliper = null;
+        clipper = null;
         clipped = null;
         closestPoint = null;
     }
